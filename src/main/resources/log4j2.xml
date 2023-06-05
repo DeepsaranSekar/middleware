@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+	<Appenders>
+		<!-- Console Appender -->
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+		
+		<RollingFile name="RollingFileAppender"
+			fileName="C:/logs/application.log"
+			filePattern="C:/logs/application-%d{yyyy-MM-dd}.log.gz">
+			<PatternLayout pattern="%d [%t] %-5p %c{1} - %m%n" />
+			<Policies>
+				<TimeBasedTriggeringPolicy />
+			</Policies>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFileAppender" />
+		</Root>
+		
+		<!-- RequestResponseLogger Logger -->
+		<Logger name="com.nuance.middleware.utility.RequestResponseLogger" level="info">
+			<AppenderRef ref="RollingFileAppender" />
+		</Logger>
+	</Loggers>
+</Configuration>
